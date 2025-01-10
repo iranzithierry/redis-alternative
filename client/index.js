@@ -1,6 +1,6 @@
 const net = require('net');
 
-class RedisClient {
+class FlashDbClient {
     constructor(host = '127.0.0.1', port = 2006) {
         this.client = net.createConnection({ host, port });
     }
@@ -30,29 +30,31 @@ class RedisClient {
     }
 }
 
-(async () => {
-    const client = new RedisClient();
+module.exports = FlashDbClient;
 
-    const userSession = {
-        name: 'Troy',
-        email: 'iranzithierry12@gmail.com',
-        ttl: 60 // 60 seconds
-    }
-    const st = "Time taken to save session"
-    const gt = "Time taken to get session"
+// (async () => {
+//     const client = new FlashDbClient();
 
-    console.time(st);
-    await client.set('user:uuid:session', JSON.stringify(userSession), userSession.ttl);
-    console.timeEnd(st);
+//     const userSession = {
+//         name: 'Troy',
+//         email: 'iranzithierry12@gmail.com',
+//         ttl: 60 // 60 seconds
+//     }
+//     const st = "Time taken to save session"
+//     const gt = "Time taken to get session"
 
-    console.time(gt);
-    console.log("SESSION:", await client.get("user:uuid:session"));
-    console.timeEnd(gt) 
+//     console.time(st);
+//     await client.set('user:uuid:session', JSON.stringify(userSession), userSession.ttl);
+//     console.timeEnd(st);
 
-    // console.log(await client.set('foo', 'bar', 10)); // OK
-    // console.log(await client.get('foo'));           // bar
-    // console.log(await client.getAll());            // foo
-    // console.log(await client.delete('foo'));      // DELETED
+//     console.time(gt);
+//     console.log("SESSION:", await client.get("user:uuid:session"));
+//     console.timeEnd(gt) 
 
-    process.exit(0);
-})();
+//     // console.log(await client.set('foo', 'bar', 10)); // OK
+//     // console.log(await client.get('foo'));           // bar
+//     // console.log(await client.getAll());            // foo
+//     // console.log(await client.delete('foo'));      // DELETED
+
+//     process.exit(0);
+// })();
