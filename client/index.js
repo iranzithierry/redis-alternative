@@ -35,7 +35,6 @@ class RedisClient {
 
     const userSession = {
         name: 'Troy',
-        age: 19,
         email: 'iranzithierry12@gmail.com',
         ttl: 60 // 60 seconds
     }
@@ -43,11 +42,11 @@ class RedisClient {
     const gt = "Time taken to get session"
 
     console.time(st);
-    await client.set('user:1:session', JSON.stringify(userSession), userSession.ttl);
+    await client.set('user:uuid:session', JSON.stringify(userSession), userSession.ttl);
     console.timeEnd(st);
 
     console.time(gt);
-    console.log("SESSION:", await client.get("user:1:session"));
+    console.log("SESSION:", await client.get("user:uuid:session"));
     console.timeEnd(gt) 
 
     // console.log(await client.set('foo', 'bar', 10)); // OK
